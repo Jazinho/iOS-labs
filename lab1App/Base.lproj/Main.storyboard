@@ -69,6 +69,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editedField:" destination="BYZ-38-t0r" eventType="editingChanged" id="z4C-aZ-SLF"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KY1-xf-tAy">
                                 <rect key="frame" x="160" y="164" width="149" height="30"/>
@@ -76,6 +79,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editedField:" destination="BYZ-38-t0r" eventType="editingChanged" id="apL-Xm-tdm"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UWL-ps-bux">
                                 <rect key="frame" x="160" y="213" width="149" height="30"/>
@@ -83,6 +89,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editedField:" destination="BYZ-38-t0r" eventType="editingChanged" id="I26-0i-D3L"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2f-Zk-noS">
                                 <rect key="frame" x="160" y="258" width="149" height="30"/>
@@ -90,6 +99,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editedField:" destination="BYZ-38-t0r" eventType="editingChanged" id="VV8-nv-kDV"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fST-Js-vne">
                                 <rect key="frame" x="16" y="442" width="70" height="30"/>
@@ -119,6 +131,9 @@
                                 <rect key="frame" x="200" y="318" width="36" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Usuń"/>
+                                <connections>
+                                    <action selector="deleteAlbum:" destination="BYZ-38-t0r" eventType="touchUpInside" id="76H-Is-SvU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bz7-Mi-4b6">
                                 <rect key="frame" x="236" y="590" width="87" height="30"/>
@@ -138,6 +153,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editedField:" destination="BYZ-38-t0r" eventType="editingChanged" id="9lx-Vi-mUm"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -145,9 +163,11 @@
                     <connections>
                         <outlet property="albumNumberLabel" destination="atd-JR-TvD" id="yqo-cK-tNd"/>
                         <outlet property="artistField" destination="d0F-6S-u66" id="6ea-09-3S2"/>
+                        <outlet property="deleteButton" destination="21W-LR-aCn" id="503-eG-rqw"/>
                         <outlet property="genreField" destination="KY1-xf-tAy" id="1nB-nw-Xny"/>
                         <outlet property="nextButton" destination="Iog-Zf-gwm" id="HYf-zi-tw7"/>
                         <outlet property="prevButton" destination="fST-Js-vne" id="1B4-Lb-lgE"/>
+                        <outlet property="saveButton" destination="GKq-MB-LDY" id="J4W-w5-qzI"/>
                         <outlet property="titleField" destination="1nG-rE-Tae" id="AIw-aA-dYR"/>
                         <outlet property="tracksField" destination="x2f-Zk-noS" id="duK-Vx-IrL"/>
                         <outlet property="yearField" destination="UWL-ps-bux" id="3WA-nY-V0M"/>

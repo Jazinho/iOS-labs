@@ -18,27 +18,40 @@ class ViewController: UIViewController {
     @IBOutlet weak var albumNumberLabel: UILabel!
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
     var albums : [[String: Any]] = [[:]]
     var curIdx = 0
     
     func updateView(){
-        artistField.text = String (describing: (albums[curIdx]["artist"])!)
-        titleField.text = String (describing: (albums[curIdx]["album"])!)
-        genreField.text = String (describing: (albums[curIdx]["genre"])!)
-        yearField.text = String (describing: (albums[curIdx]["year"])!)
-        tracksField.text = String (describing: (albums[curIdx]["tracks"])!)
-        
-        albumNumberLabel.text = "Album \(curIdx+1) z \(albums.count)"
-        
-        switch curIdx {
-        case albums.count-1:
+        if albums.count == 0 {
+            artistField.text = ""
+            titleField.text = ""
+            genreField.text = ""
+            yearField.text = ""
+            tracksField.text = ""
+            albumNumberLabel.text = "No tracks"
             nextButton.isEnabled = false
-        case 0:
             prevButton.isEnabled = false
-        default:
-            nextButton.isEnabled = true
-            prevButton.isEnabled = true
+        } else {
+            artistField.text = String (describing: (albums[curIdx]["artist"])!)
+            titleField.text = String (describing: (albums[curIdx]["album"])!)
+            genreField.text = String (describing: (albums[curIdx]["genre"])!)
+            yearField.text = String (describing: (albums[curIdx]["year"])!)
+            tracksField.text = String (describing: (albums[curIdx]["tracks"])!)
+            
+            albumNumberLabel.text = "Album \(curIdx+1) z \(albums.count)"
+            
+            switch curIdx {
+            case albums.count-1:
+                nextButton.isEnabled = false
+            case 0:
+                prevButton.isEnabled = false
+            default:
+                nextButton.isEnabled = true
+                prevButton.isEnabled = true
+            }
         }
     }
 
@@ -47,11 +60,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         let url = URL(string: "https://isebi.net/albums.php")
-        
         let urlSession = URLSession.shared
-        
         let request : URLRequest = URLRequest(url: url!)
-        
         let dataTask = urlSession.dataTask(with: request, completionHandler: {
             (data, response, error) in
             if(error == nil){
@@ -69,6 +79,7 @@ class ViewController: UIViewController {
             }
         })
         dataTask.resume()
+        saveButton.isEnabled=false
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,6 +103,22 @@ class ViewController: UIViewController {
         albums[curIdx]["genre"] = genreField.text!
         albums[curIdx]["year"] = yearField.text!
         albums[curIdx]["tracks"] = tracksField.text!
+        saveButton.isEnabled = false
+    }
+    
+    @IBAction func editedField(_ sender: UITextField) {
+        saveButton.isEnabled=true
+    }
+    
+    @IBAction func deleteAlbum(_ sender: UIButton) {
+        albums.remove(at: curIdx)
+        if(curIdx==albums.count){
+            curIdx = curIdx-1
+        }
+        if albums.count == 0 {
+            deleteButton.isEnabled = false
+        }
+        updateView()
     }
     
     
