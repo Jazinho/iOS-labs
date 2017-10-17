@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1611" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -95,16 +95,25 @@
                                 <rect key="frame" x="16" y="442" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Poprzedni"/>
+                                <connections>
+                                    <action selector="prevAlbum:" destination="BYZ-38-t0r" eventType="touchUpInside" id="10E-Ro-o7f"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iog-Zf-gwm">
                                 <rect key="frame" x="294" y="442" width="65" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Nastepny"/>
+                                <connections>
+                                    <action selector="nextAlbum:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jdh-In-GuQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKq-MB-LDY">
                                 <rect key="frame" x="282" y="318" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Zapisz"/>
+                                <connections>
+                                    <action selector="updateAlbum:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9bL-z1-sgH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21W-LR-aCn">
                                 <rect key="frame" x="200" y="318" width="36" height="30"/>
@@ -117,7 +126,7 @@
                                 <state key="normal" title="Nowy rekord"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rekord X z Y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atd-JR-TvD">
-                                <rect key="frame" x="45" y="322" width="98" height="21"/>
+                                <rect key="frame" x="15" y="322" width="160" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -134,8 +143,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="albumNumberLabel" destination="atd-JR-TvD" id="yqo-cK-tNd"/>
                         <outlet property="artistField" destination="d0F-6S-u66" id="6ea-09-3S2"/>
                         <outlet property="genreField" destination="KY1-xf-tAy" id="1nB-nw-Xny"/>
+                        <outlet property="nextButton" destination="Iog-Zf-gwm" id="HYf-zi-tw7"/>
+                        <outlet property="prevButton" destination="fST-Js-vne" id="1B4-Lb-lgE"/>
                         <outlet property="titleField" destination="1nG-rE-Tae" id="AIw-aA-dYR"/>
                         <outlet property="tracksField" destination="x2f-Zk-noS" id="duK-Vx-IrL"/>
                         <outlet property="yearField" destination="UWL-ps-bux" id="3WA-nY-V0M"/>
@@ -143,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-505" y="-36"/>
+            <point key="canvasLocation" x="-506.39999999999998" y="-36.431784107946029"/>
         </scene>
     </scenes>
 </document>
