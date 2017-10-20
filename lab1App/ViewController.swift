@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
-    var albums : [[String: Any]] = [[:]]
+    var albums : [[String: AnyObject]] = [[:]]
     var curIdx = 0
     
     func updateView(){
@@ -35,23 +35,42 @@ class ViewController: UIViewController {
             nextButton.isEnabled = false
             prevButton.isEnabled = false
         } else {
-            artistField.text = String (describing: (albums[curIdx]["artist"])!)
-            titleField.text = String (describing: (albums[curIdx]["album"])!)
-            genreField.text = String (describing: (albums[curIdx]["genre"])!)
-            yearField.text = String (describing: (albums[curIdx]["year"])!)
-            tracksField.text = String (describing: (albums[curIdx]["tracks"])!)
+            if let unwrapped = albums[curIdx]["artist"] {
+                artistField.text = String (describing: unwrapped)
+            }else{
+                artistField.text = ""
+            }
+            if let unwrapped = albums[curIdx]["album"] {
+                titleField.text = String (describing: unwrapped)
+            }else{
+                titleField.text = ""
+            }
+            if let unwrapped = albums[curIdx]["genre"] {
+                genreField.text = String (describing: unwrapped)
+            }else{
+                genreField.text = ""
+            }
+            if let unwrapped = albums[curIdx]["year"] {
+                yearField.text = String (describing: unwrapped)
+            }else{
+                yearField.text = ""
+            }
+            if let unwrapped = albums[curIdx]["tracks"] {
+                tracksField.text = String (describing: unwrapped)
+            }else{
+                tracksField.text = ""
+            }
             
             albumNumberLabel.text = "Album \(curIdx+1) z \(albums.count)"
             
             switch curIdx {
-            case albums.count-1:
-                nextButton.isEnabled = false
             case 0:
                 prevButton.isEnabled = false
             default:
                 nextButton.isEnabled = true
                 prevButton.isEnabled = true
             }
+            saveButton.isEnabled = false
         }
     }
 
@@ -66,7 +85,7 @@ class ViewController: UIViewController {
             (data, response, error) in
             if(error == nil){
                 do{
-                    if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String:Any]]{
+                    if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String:AnyObject]]{
                             self.albums = json
                     }
                     print(self.albums)
@@ -88,8 +107,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func nextAlbum(_ sender: UIButton) {
-        curIdx = curIdx + 1
-        updateView()
+        if(curIdx == albums.count-1){
+            addEmptyAlbum()
+        }else{
+            curIdx = curIdx + 1
+            updateView()
+        }
     }
     
     @IBAction func prevAlbum(_ sender: UIButton) {
@@ -98,12 +121,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func updateAlbum(_ sender: UIButton) {
-        albums[curIdx]["album"] = titleField.text!
-        albums[curIdx]["artist"] = artistField.text!
-        albums[curIdx]["genre"] = genreField.text!
-        albums[curIdx]["year"] = yearField.text!
-        albums[curIdx]["tracks"] = tracksField.text!
-        saveButton.isEnabled = false
+        albums[curIdx]["album"] = titleField.text! as NSString
+        albums[curIdx]["artist"] = artistField.text! as NSString
+        albums[curIdx]["genre"] = genreField.text! as NSString
+        albums[curIdx]["year"] = yearField.text! as NSString
+        albums[curIdx]["tracks"] = tracksField.text! as NSString
+        updateView()
     }
     
     @IBAction func editedField(_ sender: UITextField) {
@@ -121,6 +144,20 @@ class ViewController: UIViewController {
         updateView()
     }
     
+    @IBAction func addNewAlbum(_ sender: UIButton) {
+        addEmptyAlbum()
+    }
     
+    func addEmptyAlbum(){
+        curIdx = albums.count
+        artistField.text = ""
+        titleField.text = ""
+        genreField.text = ""
+        yearField.text = ""
+        tracksField.text = ""
+        albumNumberLabel.text = "Nowy rekord"
+        let emptyString = "" as AnyObject
+        albums.append(["tracks":emptyString, "album":emptyString, "year":emptyString, "artist":emptyString, "genre":emptyString])
+    }
 }
 
