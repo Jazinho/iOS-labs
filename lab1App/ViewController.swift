@@ -78,26 +78,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let url = URL(string: "https://isebi.net/albums.php")
-        let urlSession = URLSession.shared
-        let request : URLRequest = URLRequest(url: url!)
-        let dataTask = urlSession.dataTask(with: request, completionHandler: {
-            (data, response, error) in
-            if(error == nil){
-                do{
-                    if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String:AnyObject]]{
-                            self.albums = json
-                    }
-                    print(self.albums)
-                    DispatchQueue.main.async {
-                        self.updateView()
-                    }
-                }catch {
-                    print("Sth wrong happend")
-                }
-            }
-        })
-        dataTask.resume()
         saveButton.isEnabled=false
     }
     
