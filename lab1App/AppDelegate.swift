@@ -9,13 +9,18 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
 
+    internal func splitViewController(_: UISplitViewController, collapseSecondary: UIViewController, onto: UIViewController) -> Bool {
+        return true
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let splitController = self.window!.rootViewController as! UISplitViewController
+        splitController.delegate = self
         return true
     }
 

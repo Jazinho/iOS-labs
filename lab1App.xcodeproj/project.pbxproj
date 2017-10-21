@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D1321331F9A960D00F3106A /* AlbumsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1321321F9A960D00F3106A /* AlbumsSplitViewController.swift */; };
 		AC0787F21F8C9F4D0020B3D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0787F11F8C9F4D0020B3D5 /* AppDelegate.swift */; };
 		AC0787F41F8C9F4D0020B3D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0787F31F8C9F4D0020B3D5 /* ViewController.swift */; };
 		AC0787F71F8C9F4D0020B3D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0787F51F8C9F4D0020B3D5 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D1321321F9A960D00F3106A /* AlbumsSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsSplitViewController.swift; sourceTree = "<group>"; };
 		AC0787EE1F8C9F4D0020B3D5 /* lab1App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lab1App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC0787F11F8C9F4D0020B3D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC0787F31F8C9F4D0020B3D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				AC0787F81F8C9F4D0020B3D5 /* Assets.xcassets */,
 				AC0787FA1F8C9F4D0020B3D5 /* LaunchScreen.storyboard */,
 				AC0787FD1F8C9F4D0020B3D5 /* Info.plist */,
+				3D1321321F9A960D00F3106A /* AlbumsSplitViewController.swift */,
 			);
 			path = lab1App;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			files = (
 				AC0787F41F8C9F4D0020B3D5 /* ViewController.swift in Sources */,
 				AC0787F21F8C9F4D0020B3D5 /* AppDelegate.swift in Sources */,
+				3D1321331F9A960D00F3106A /* AlbumsSplitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +507,7 @@
 				AC0788181F8C9F4D0020B3D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AC0788191F8C9F4D0020B3D5 /* Build configuration list for PBXNativeTarget "lab1AppTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +516,7 @@
 				AC07881B1F8C9F4D0020B3D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AC07881C1F8C9F4D0020B3D5 /* Build configuration list for PBXNativeTarget "lab1AppUITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +525,7 @@
 				AC07881E1F8C9F4D0020B3D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
