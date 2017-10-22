@@ -1,47 +1,45 @@
 //
-//  TableViewController.swift
+//  DetailsTableCtrl.swift
 //  lab1App
 //
-//  Created by Jan on 10/21/17.
+//  Created by Jan on 10/22/17.
 //  Copyright © 2017 Użytkownik Gość. All rights reserved.
 //
 
 import UIKit
 
-class TableViewController: UITableViewController {
-    var albums: [[String:AnyObject]] = [[:]]
-
+class DetailsTableCtrl: UITableViewController {
+    var artistName: String = ""
+    var titleName: String = ""
+    var yearName: String = ""
+    var genreName: String = ""
+    var tracksName: String = ""
+    
+    @IBOutlet weak var albumField: UITextField!
+    @IBOutlet weak var artistField: UITextField!
+    @IBOutlet weak var yearField: UITextField!
+    @IBOutlet weak var genreField: UITextField!
+    @IBOutlet weak var tracksField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let url = URL(string: "https://isebi.net/albums.php")
-        let urlSession = URLSession.shared
-        let request : URLRequest = URLRequest(url: url!)
-        let dataTask = urlSession.dataTask(with: request, completionHandler: {
-            (data, response, error) in
-            if(error == nil){
-                do{
-                    if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String:AnyObject]]{
-                        self.albums = json
-                    }
-                    print(self.albums)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }catch {
-                    print("Sth wrong happend")
-                }
-            }
-        })
-        dataTask.resume()
-        
+        print("Got albumName as \(titleName)")
+        updateView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
+    func updateView(){
+        artistField?.text = String (describing: artistName)
+        albumField?.text = String (describing: titleName)
+        genreField?.text = String (describing: genreName)
+        yearField?.text = String (describing: yearName)
+        tracksField?.text = String (describing: tracksName)
+     }
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,37 +54,18 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.albums.count
+        return 5
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-        let artistLabel = cell.viewWithTag(2) as! UILabel
-        let titleLabel = cell.viewWithTag(1) as! UILabel
-        let yearLabel = cell.viewWithTag(3) as! UILabel
-        
-        if let albumName = albums[indexPath.row]["album"] {
-            titleLabel.text = String (describing: albumName)
-        } else {
-            titleLabel.text = ""
-        }
-        if let artistName = albums[indexPath.row]["artist"] {
-            artistLabel.text = String (describing: artistName)
-        } else {
-            artistLabel.text = ""
-        }
-        if let yearName = albums[indexPath.row]["year"] {
-            yearLabel.text = String (describing: "(\(yearName))")
-        } else {
-            yearLabel.text = ""
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
         // Configure the cell...
 
         return cell
     }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -123,25 +102,14 @@ class TableViewController: UITableViewController {
     }
     */
 
-
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "showDetails"){
-            let dvc = segue.destination as! DetailsViewCtrl
-            let selected = tableView.indexPathForSelectedRow
-            
-            dvc.album = albums[(selected?.row)!]
-            dvc.curIndex = (selected?.row)!
-        }
-        
-        if(segue.identifier == "deleteSegue"){
-            let dvc = segue.source as! DetailsViewCtrl
-            
-            albums.remove(at: dvc.curIndex)
-        }
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
- 
+    */
 
 }
