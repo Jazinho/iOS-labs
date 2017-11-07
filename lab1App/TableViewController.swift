@@ -14,7 +14,11 @@ class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("DID LOAD with \(albums.count)")
+        
+        if let fetchedAlbums = fetchData(){
+            self.albums = fetchedAlbums
+        }else{
+        
         if(albums[0].count == 0){
             let url = URL(string: "https://isebi.net/albums.php")
             let urlSession = URLSession.shared
@@ -37,12 +41,35 @@ class TableViewController: UITableViewController {
             })
             dataTask.resume()
         }
+            
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if(albums.count > 0){
+            persistData(data: self.albums)
+        }
+    }
+    
+    func persistData(data: [[String: AnyObject]]){
+        let dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let dbPath = dirPaths.first! + "/" + "db_file"
+        
+        NSKeyedArchiver.archiveRootObject(data, toFile: dbPath)
+    }
+    
+    func fetchData() -> [[String: AnyObject]]? {
+        let dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let dbPath = dirPaths.first! + "/" + "db_file"
+        
+        return NSKeyedUnarchiver.unarchiveObject(withFile: dbPath) as? [[String: AnyObject]]
     }
 
     override func didReceiveMemoryWarning() {
