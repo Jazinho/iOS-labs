@@ -10,30 +10,33 @@ import UIKit
 
 class TableViewController: UITableViewController {
     var albums: [[String:AnyObject]] = [[:]]
+    var curIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let url = URL(string: "https://isebi.net/albums.php")
-        let urlSession = URLSession.shared
-        let request : URLRequest = URLRequest(url: url!)
-        let dataTask = urlSession.dataTask(with: request, completionHandler: {
-            (data, response, error) in
-            if(error == nil){
-                do{
-                    if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String:AnyObject]]{
-                        self.albums = json
+        print("DID LOAD with \(albums.count)")
+        if(albums[0].count == 0){
+            let url = URL(string: "https://isebi.net/albums.php")
+            let urlSession = URLSession.shared
+            let request : URLRequest = URLRequest(url: url!)
+            let dataTask = urlSession.dataTask(with: request, completionHandler: {
+                (data, response, error) in
+                if(error == nil){
+                    do{
+                        if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String:AnyObject]]{
+                            self.albums = json
+                        }
+                        print(self.albums)
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }catch {
+                        print("Sth wrong happend")
                     }
-                    print(self.albums)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }catch {
-                    print("Sth wrong happend")
                 }
-            }
-        })
-        dataTask.resume()
+            })
+            dataTask.resume()
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -85,7 +88,7 @@ class TableViewController: UITableViewController {
         // Configure the cell...
 
         return cell
-    }
+    }    
     
 
     /*
@@ -130,16 +133,24 @@ class TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "showDetails"){
             let dvc = segue.destination as! DetailsViewCtrl
+            dvc.tvc = self
             let selected = tableView.indexPathForSelectedRow
             
+            curIndex = (selected?.row)!
             dvc.album = albums[(selected?.row)!]
+            dvc.albumsCount = albums.count
             dvc.curIndex = (selected?.row)!
         }
-        
-        if(segue.identifier == "deleteSegue"){
-            let dvc = segue.source as! DetailsViewCtrl
+        if(segue.identifier == "addNew"){
+            let dvc = segue.destination as! DetailsViewCtrl
+            dvc.tvc = self
+            let emptyString = "" as AnyObject
             
-            albums.remove(at: dvc.curIndex)
+            dvc.curIndex = albums.count
+            dvc.albumsCount = albums.count
+            albums.append(["album": emptyString, "artist":emptyString, "year": emptyString, "genre": emptyString, "tracks": emptyString])
+            dvc.album = albums[albums.count-1]
+            self.tableView.reloadData()
         }
     }
  

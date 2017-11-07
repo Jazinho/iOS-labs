@@ -23,7 +23,6 @@ class DetailsTableCtrl: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Got albumName as \(titleName)")
         updateView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

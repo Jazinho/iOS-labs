@@ -11,6 +11,10 @@ import UIKit
 class DetailsViewCtrl: UIViewController {
     var album: [String:AnyObject] = [:]
     var curIndex = 0
+    var albumsCount = 0
+    var tvc: TableViewController = TableViewController()
+    var dtc: DetailsTableCtrl = DetailsTableCtrl()
+    var wasDeleted = false
     
     @IBOutlet weak var deleteButton: UIButton!
     
@@ -18,14 +22,39 @@ class DetailsViewCtrl: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let g = String(describing: album["genre"])
-        print("Album genre is: \(g)")
+        if(curIndex==albumsCount){
+            self.navigationItem.prompt = "Nowy album"
+        }else{
+            let index = curIndex+1
+            self.navigationItem.prompt = "Edycja rekordu \(index) z \(albumsCount)"
+        }
+    }
+    
+    override func willMove(toParentViewController: UIViewController?)
+    {
+        if !wasDeleted  {
+            if toParentViewController == nil
+            {
+                tvc.albums[curIndex]["album"] = (dtc.albumField?.text)! as AnyObject
+                tvc.albums[curIndex]["artist"] = (dtc.artistField.text)! as AnyObject
+                tvc.albums[curIndex]["year"] = (dtc.yearField.text)! as AnyObject
+                tvc.albums[curIndex]["genre"] = (dtc.genreField.text)! as AnyObject
+                tvc.albums[curIndex]["tracks"] = (dtc.tracksField.text)! as AnyObject
+                tvc.tableView.reloadData()
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func deleteAlbum(_ sender: UIButton){
+        tvc.albums.remove(at: curIndex)
+        wasDeleted = true
+        navigationController?.popToRootViewController(animated: true)
+        tvc.tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,11 +87,10 @@ class DetailsViewCtrl: UIViewController {
                 tvc.tracksName = ""
             }
             
+            self.dtc = tvc
             tvc.tableView.reloadData()
         }
         
-        
-        // Pass the selected object to the new view controller.
     }
 }
 
